@@ -2,9 +2,52 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var listaPessoas = (List<Fiap20Mob.RM339001.Cloud.Api.Models.Pessoa>) ViewData["ListaPessoas"];
 }
 
     <div class="text-center">
         <h1>Olá Fiap! o/</h1>
         <h2>Versão: 1.0.0</h2>
     </div>
+<div class="container-fluid row">
+    <div class="col-3">
+        <form method="post">
+            <div class="form-group row">
+                <label for="inputNome">Nome:</label>
+                    <input type="text" name="Pessoa.Nome" class="form-control" maxlength="50" id="inputNome">
+            </div>
+            <div class="form-group row">
+                <label for="inputSobrenome">Sobrenome:</label>
+                    <input maxlength="50" name="Pessoa.Sobrenome" type="text" class="form-control" id="inputSobrenome">
+            </div>
+            <div class="form-group row">
+                <label for="inputIdade">Idade:</label>
+                    <input max="150" type="number" name="Pessoa.Idade" class="form-control" id="inputIdade">
+            </div>
+            <button type="submit" asp-action="OnPost" class="btn btn-primary">Adicionar</button>
+        </form>
+    </div>
+    <div class="col">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Idade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in listaPessoas)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nome</td>
+                        <td>@item.Sobrenome</td>
+                        <td>@item.Idade</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
